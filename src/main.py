@@ -57,10 +57,12 @@ while go:
             row.append(tile)
         tiles.append(row)
 
+    game_over = ttt.game_over(board)
+
     # players move
     player = ttt.player(board)
     pressed, _, _ = pygame.mouse.get_pressed()
-    if pressed:
+    if pressed and not game_over:
         pos = pygame.mouse.get_pos()
         for i in range(3):
             for j in range(3):
@@ -69,5 +71,7 @@ while go:
                         board[i][j] = ttt.X
                     else:
                         board[i][j] = ttt.O
+
+
 
     pygame.display.flip()
