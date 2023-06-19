@@ -10,9 +10,9 @@ screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Tic Tac Toe")
 
-# TODO: change font
 # font
-game_font = pygame.font.Font('font/Minecraft.ttf', 60)
+retry_font = pygame.font.Font('font/OpenSans-Regular.ttf', 30)
+game_font = pygame.font.Font('font/OpenSans-Regular.ttf', 60)
 
 # colors
 black = (0, 0, 0)
@@ -72,6 +72,20 @@ while go:
                     else:
                         board[i][j] = ttt.O
 
+    # reset game state
+    if game_over:
+        retryButton = pygame.Rect(screen_width / 3, tile_size * 4 + (tile_size - 50) / 2, screen_width / 3, 50)
+        pygame.draw.rect(screen, white, retryButton)
 
+        retry = retry_font.render("Retry", True, black)
+        retryRect = retry.get_rect()
+        retryRect.center = retryButton.center
+        screen.blit(retry, retryRect)
+
+        pressed, _, _ = pygame.mouse.get_pressed()
+        if pressed:
+            pos = pygame.mouse.get_pos()
+            if retryButton.collidepoint(pos):
+                board = ttt.initial_board()
 
     pygame.display.flip()
