@@ -61,10 +61,11 @@ while go:
     player = ttt.player(board)
     game_over = ttt.game_over(board)
 
+    # title players turn
     if not game_over:
         player_text = game_font.render(f"Turn: Player {player}", True, white)
         playerRect = player_text.get_rect()
-        playerRect.center = ((screen_width / 2), (tile_size / 2))
+        playerRect.center = (screen_width / 2, tile_size / 2)
         screen.blit(player_text, playerRect)
 
     # players move
@@ -86,19 +87,22 @@ while go:
 
         winner = ttt.winner(board)
 
+        # reset button
         retry = retry_font.render("Retry", True, black)
         retryRect = retry.get_rect()
         retryRect.center = retryButton.center
         screen.blit(retry, retryRect)
 
+        # title game over and game result
         if winner is not None:
             gameover_text = game_font.render(f"Game Over: Player {winner} wins", True, white)
         else:
             gameover_text = game_font.render(f"Game Over: Tie", True, white)
         gameoverRect = gameover_text.get_rect()
-        gameoverRect.center = ((screen_width / 2), (tile_size / 2))
+        gameoverRect.center = (screen_width / 2, tile_size / 2)
         screen.blit(gameover_text, gameoverRect)
 
+        # reset board
         pressed, _, _ = pygame.mouse.get_pressed()
         if pressed:
             pos = pygame.mouse.get_pos()
