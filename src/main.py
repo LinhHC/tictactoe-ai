@@ -22,6 +22,8 @@ white = (255, 255, 255)
 # game settings
 go = True
 board = ttt.initial_board()
+# TODO: remember to change that
+user = ttt.X
 
 
 def draw(d_board, d_tile):
@@ -63,22 +65,25 @@ while go:
 
     # title players turn
     if not game_over:
+
         player_text = game_font.render(f"Turn: Player {player}", True, white)
         playerRect = player_text.get_rect()
         playerRect.center = (screen_width / 2, tile_size / 2)
         screen.blit(player_text, playerRect)
 
-    # players move
-    pressed, _, _ = pygame.mouse.get_pressed()
-    if pressed and not game_over:
-        pos = pygame.mouse.get_pos()
-        for i in range(3):
-            for j in range(3):
-                if board[i][j] == ttt.EMPTY and tiles[i][j].collidepoint(pos):
-                    if player == ttt.X:
-                        board[i][j] = ttt.X
-                    else:
-                        board[i][j] = ttt.O
+        # player's turn
+        if player == user:
+            pressed, _, _ = pygame.mouse.get_pressed()
+            if pressed and not game_over:
+                pos = pygame.mouse.get_pos()
+                for i in range(3):
+                    for j in range(3):
+                        if board[i][j] == ttt.EMPTY and tiles[i][j].collidepoint(pos):
+                            board[i][j] = player
+        # ai turn
+        else:
+            move = ttt.minimax(board)
+            board[move[0]][move[1]] = player
 
     # reset game state
     if game_over:
