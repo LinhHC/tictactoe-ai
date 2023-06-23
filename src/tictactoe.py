@@ -78,10 +78,7 @@ def game_over(board):
     """
     Returns True if game is over, else returns False.
     """
-    if winner(board) is not None or (EMPTY not in board[0] and EMPTY not in board[1] and EMPTY not in board[2]):
-        return True
-    else:
-        return False
+    return winner(board) is not None or (EMPTY not in board[0] and EMPTY not in board[1] and EMPTY not in board[2])
 
 
 def actions(board):
@@ -92,9 +89,10 @@ def actions(board):
     for i in range(len(board)):
         for j in range(len(board)):
             if board[i][j] == EMPTY:
-                valid_moves.add((i,j))
+                valid_moves.add((i, j))
 
     return valid_moves
+
 
 def utility(board):
     """
@@ -133,10 +131,10 @@ def minimax(board):
 
     if player(board) == X:
         for action in actions(board):
-            if max_value(board) == min_value(result(board,action)):
+            if max_value(board) == min_value(result(board, action)):
                 return action
 
     if player(board) == O:
         for action in actions(board):
-            if min_value(board) == max_value(result(board,action)):
+            if min_value(board) == max_value(result(board, action)):
                 return action

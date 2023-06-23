@@ -1,3 +1,5 @@
+import time
+
 import pygame
 import sys
 import tictactoe as ttt
@@ -24,7 +26,7 @@ go = True
 board = ttt.initial_board()
 # TODO: remember to change that
 user = ttt.X
-
+ai_turn = False
 
 def draw(d_board, d_tile):
     if d_board != ttt.EMPTY:
@@ -63,16 +65,31 @@ while go:
     player = ttt.player(board)
     game_over = ttt.game_over(board)
 
-    # title players turn
+    # game ongoing
     if not game_over:
 
-        player_text = game_font.render(f"Turn: Player {player}", True, white)
+        # title text
+        if player != user:
+            player_text = game_font.render(f"AI calculating next move...", True, white)
+        else:
+            player_text = game_font.render(f"Turn: Player {player}", True, white)
+
         playerRect = player_text.get_rect()
         playerRect.center = (screen_width / 2, tile_size / 2)
         screen.blit(player_text, playerRect)
 
+        # ai turn
+        if player != user:
+            if ai_turn:
+                time.sleep(1)
+                move = ttt.minimax(board)
+                board[move[0]][move[1]] = player
+                ai_turn = False
+            else:
+                ai_turn = True
+
         # player's turn
-        if player == user:
+        else:
             pressed, _, _ = pygame.mouse.get_pressed()
             if pressed and not game_over:
                 pos = pygame.mouse.get_pos()
@@ -80,13 +97,10 @@ while go:
                     for j in range(3):
                         if board[i][j] == ttt.EMPTY and tiles[i][j].collidepoint(pos):
                             board[i][j] = player
-        # ai turn
-        else:
-            move = ttt.minimax(board)
-            board[move[0]][move[1]] = player
 
     # reset game state
     if game_over:
+
         retryButton = pygame.Rect(screen_width / 3, tile_size * 4 + (tile_size - 50) / 2, screen_width / 3, 50)
         pygame.draw.rect(screen, white, retryButton)
 
@@ -98,11 +112,12 @@ while go:
         retryRect.center = retryButton.center
         screen.blit(retry, retryRect)
 
-        # title game over and game result
+        # title: game over and game result
         if winner is not None:
             gameover_text = game_font.render(f"Game Over: Player {winner} wins", True, white)
         else:
             gameover_text = game_font.render(f"Game Over: Tie", True, white)
+
         gameoverRect = gameover_text.get_rect()
         gameoverRect.center = (screen_width / 2, tile_size / 2)
         screen.blit(gameover_text, gameoverRect)
