@@ -2,7 +2,7 @@
 A simple Tic-Tac-Toe game written in Python and their pygame framework. Users play against an AI, 
 which was implemented using the minimax algorithm.
 
-![image of tictactoe game window](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![image of tictactoe game window](https://github.com/LinhHC/tictactoe-ai/blob/ai-logic/data/game-window.bmp)
 
 ## Introduction
 This project was created as an introductory training project getting familiar with the pygame framework
