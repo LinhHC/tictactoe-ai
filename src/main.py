@@ -37,6 +37,7 @@ while go:
 
     screen.fill(black)
 
+    # create menu window
     if user is None:
 
         # menu title
