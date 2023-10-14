@@ -1,14 +1,12 @@
 # tictactoe-ai
-A simple Tic-Tac-Toe game written in Python and their pygame framework. Users play against an AI, 
+A simple Tic-Tac-Toe game written in Python and using their pygame framework. Users play against an AI, 
 which was implemented using the minimax algorithm.
 
 ![image of tictactoe game window](data/game-window.png)
 
 ## Introduction
-This project was created as an introductory training project getting familiar with the pygame framework
-and to get started with artifical intelligence and machine learning algorithms. The application is based on the online course 
-"CS50’s Introduction to Artificial Intelligence with Python".
-
+This project was created as an introductory training project to get familiar with the pygame framework
+and to get started with artifical intelligence and machine learning algorithms.
 ## Minimax Algorithm
 The minimax is an algorithm to determine the best possible moves in two player zero-sum games. 
 In these type of games the gain of an advantage of one player results automatically to an equivalent
@@ -21,3 +19,7 @@ best move in a simulation of all possible games beginning at the current state a
 state is reached. Every terminal state is marked with either (-1), (0) or (+1).
 
 ![image of minimax in tic tac toe](data/minimax.png)
+
+## Inspiration
+The application and the pictures used in the README are based on the online course 
+"CS50’s Introduction to Artificial Intelligence with Python".
